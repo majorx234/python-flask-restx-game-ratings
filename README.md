@@ -2,7 +2,7 @@
 * example to do REST with python, additional want use SQL Databases and JWT
 
 # folder structure 
-* `
+```
 ├── environments.py
 ├── main.py
 ├── models
@@ -13,7 +13,7 @@
 │   └── game_ratings.py
 └── tests
     └── test_game_ratings_api.py
-`
+```
 # environments.py 
 * for switching between Develop and Productive envronment
 ```python
@@ -63,10 +63,10 @@ if __name__ == '__main__':
 #    app.run(debug=config.debug, port=config.port)
     app.run(debug=True, port=5000)
 ```
-* run with ~~python main.py~~
+* run with `python main.py`
   * or better `export BG_CONFIG="dev"; python main.py`
 * afterwards open in browser: http://127.0.0.1:5000/swagger-ui
-* now with use of ~~resources~~ with a namespace:
+* 2nd step: now with use of **resources** with a **namespace**:
 ```python
 from flask import Flask
 from flask_restx import Api
@@ -93,6 +93,9 @@ if __name__ == '__main__':
 ```
 # resources 
 ## game_ratings.py 
+* important the resources is the entity to manage the **REST** Interface
+  * **REST** communicates with `GET`,`DELETE`,`PUT` or `POST`
+  * so there are class methods therefore:
 ```python
 from flask_restx import Namespace, Resource
 from flask import Flask, jsonify, request
@@ -143,7 +146,7 @@ class GameLists(Resource):
         return new_game_json, HTTPStatus.CREATED
 ```
 * testing a resource with:
-  * ~~POST~~: `curl -H "Content-Type: application/json" --request POST -d '{"id":"2","name":"Mario","designer":"ElizabethHargrave","playing_time":"60Min"}' "http://localhost:5000/game_ratings"`
-  * ~~GET~~: `curl --request GET "http://localhost:5000/game_ratings"`
+  * **POST**: `curl -H "Content-Type: application/json" --request POST -d '{"id":"2","name":"Mario","designer":"ElizabethHargrave","playing_time":"60Min"}' "http://localhost:5000/game_ratings"`
+  * **GET**: `curl --request GET "http://localhost:5000/game_ratings"`
 
 
