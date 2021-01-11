@@ -1,0 +1,5 @@
+*.py[cod]
+.emacs.desktop
+__pycache__/
+.#*.*
+\#*#
