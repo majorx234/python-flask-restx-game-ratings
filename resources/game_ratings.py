@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 from http import HTTPStatus
 
 games = {} #games stored in memory
+
 api = Namespace('game_ratings',
                  description='game_ratings related operations') 
 
@@ -22,7 +23,6 @@ class Game(Resource):
             return '', HTTPStatus.NO_CONTENT
         else:
             abort(HTTPStatus.NOT_FOUND, 'game {0} not found.' .format(id))
-
     def put(self, id):
         ''' Updates a game'''
         game = request.json
@@ -42,7 +42,8 @@ class GameLists(Resource):
 
     def post(self):
         '''Adds a game to games'''
-        new_game_json = request.json 
-        games[new_game_json['id']] = new_game_json
+        new_game_json = request.json
+        print(new_game_json)
+        id_from_json = new_game_json['id']
+        games[id_from_json] = new_game_json
         return new_game_json, HTTPStatus.CREATED
-  
