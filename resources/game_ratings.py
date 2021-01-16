@@ -5,8 +5,10 @@ from http import HTTPStatus
 games = {} #games stored in memory
 
 api = Namespace('game_ratings',
-                 description='game_ratings related operations') 
+                 description='game_ratings related operations')
 
+#www.laurasserver.de/game_ratings/
+# crud create read update delete: (POST,GET,PUT,DELETE) PGPD
 @api.route('<id>')
 class Game(Resource):
     def get(self, id):
