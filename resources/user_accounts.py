@@ -1,5 +1,3 @@
-
-
 from flask_restx import Namespace, Resource
 from flask import Flask, jsonify, request
 from http import HTTPStatus
@@ -17,7 +15,6 @@ class UserAccounts(Resource):
         id = len(users)
         print("my id: " + str(id))
         users.append(new_user_json)
-        id = id + 1
         return new_user_json, HTTPStatus.CREATED
 
     def get(self):

@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_restx import Api
 from environments import config
 import logging
@@ -6,6 +7,10 @@ from resources.game_ratings import api as game_ratings_api_namespace
 from resources.user_accounts import api as user_accounts_api_namespace 
 
 app = Flask("User games ratings")
+
+# erweiterung für cross origin requests
+CORS(app)
+
 # wir erstellen eine REST-Api mittels restx und flanschen die an die app
 # app is von Flask , api is von restx
 api = Api(app,
