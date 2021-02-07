@@ -1,10 +1,9 @@
 from flask_restx import Namespace, Resource
 from flask import Flask, jsonify, request
 from http import HTTPStatus
+from resources.user_account_db_interface import UserAccountDBInterface
 
-users = []
-myuser = {'username':'TestUser', 'password': 'dd377093c6a6e841a49695cf11b440fb'}
-users.append(myuser)
+userdb = UserAccountDBInterface() 
 
 api = Namespace('user_accounts',
                 description="user accounts related operations")
@@ -14,31 +13,18 @@ class UserAccounts(Resource):
     def post(self):
         '''Erstelle einen UserAccount'''
         new_user_json = request.json
-        print(new_user_json)      
-        #id = len(users)
-        #print("my id: " + str(id))
-        #users.append(new_user_json)
-        #return new_user_json, HTTPStatus.CREATED
+
         username = new_user_json["username"]
         password = new_user_json["password"]
-        print("username: {}".format(username))
-        print("password: {}".format(password))
-        if ( self.logTheUserIn(users,new_user_json)):
-            print("ok")
+        
+        if (userdb.loginQuery( username, password )):
             return new_user_json, HTTPStatus.OK
         else:
-            print("computer says no!")
+            # HTTPStatus meldung verbessern
             return new_user_json, HTTPStatus.FORBIDDEN
            
     def get(self):
         '''Gebe alle erstellten User zurück'''
         return users, HTTPStatus.OK
 
-    def logTheUserIn(self, users, newuser):
-       #Vergleich mit Passworthash einbauen
-        for user in users:
-            if  (user["username"] == newuser["username"]) :
-                return True
-        print("der user is nicht drin")    
-        return False  # hier hatter die ganze schleife
 
